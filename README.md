@@ -88,6 +88,9 @@ The following video demonstrates the applications functionality:
 
 
 
+
+
+
 ## Technologies Used
 
 * JavaScript
