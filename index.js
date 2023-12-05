@@ -1,18 +1,19 @@
-// TODO: Include packages needed for this application
+//packages needed for this application
 
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown')
 
 
-// TODO: Create an array of questions for user input
+//an array of questions for user input
 const questions = [
-    "What is the name of your file? ex: README.md",
-    "What is the title?",
-    "What is the description?",
+    "What is the name of your file? ex: README",
+    "What is the title of your application?",
+    "What is the description of your application?",
     "What technologies were used to create the application?",
     "How do users install the application?",
     "How do users use the application?",
-    "What are the contribution guidelines?",
+    "What are the contribution guidelines for your application?",
     "How can you test the application?",
     "What license is the application covered under?",
     "What is your GitHub username?",
@@ -20,14 +21,14 @@ const questions = [
     "Add any credits to project:"
 ];
 
-// TODO: Create a function to write README file
+//a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) =>
+    fs.writeFile(fileName + '.md', data, (err) =>
         err ? console.error(err) : console.log('Success!')
     )
 }
 
-// TODO: Create a function to initialize app
+//a function to initialize app and prompt user
 function init() {
     inquirer
         .prompt([
@@ -35,42 +36,50 @@ function init() {
                 type: 'input',
                 message: questions[0],
                 name: 'file',
+                validate: (answer) => !answer ? "You must provide a filename" : true
             },
             {
                 type: 'input',
                 message: questions[1],
                 name: 'title',
+                validate: (answer) => !answer ? "You must provide a title" : true
             },
             {
                 type: 'input',
                 message: questions[2],
                 name: 'description',
+                validate: (answer) => !answer ? "You must provide a description" : true
             },
             {
                 type: 'checkbox',
                 message: questions[3],
                 choices: [" HTML", " JavaScript", " CSS", " Java", " React"],
                 name: 'technologies',
+                validate: (answer) => !answer ? "You must provide at least one technology" : true
             },
             {
                 type: 'input',
                 message: questions[4],
                 name: 'installation',
+                validate: (answer) => !answer ? "You must provide a installation instructions" : true
             },
             {
                 type: 'input',
                 message: questions[5],
                 name: 'usage',
+                validate: (answer) => !answer ? "You must provide usage information" : true
             },
             {
                 type: 'input',
                 message: questions[6],
                 name: 'contributing',
+                validate: (answer) => !answer ? "You must provide contribution guidelines" : true
             },
             {
                 type: 'input',
                 message: questions[7],
                 name: 'tests',
+                validate: (answer) => !answer ? "You must provide how to test your application" : true
             },
             {
                 type: 'list',
@@ -92,6 +101,10 @@ function init() {
                         name: "Eclipse",
                         value: "Eclipse",
                     },
+                    {
+                        name: "None",
+                        value: "None",
+                    },
                 ],
                 name: 'license',
             },
@@ -112,85 +125,11 @@ function init() {
             },
         ])
         .then((response) => {
-            generateData(response);
+            const file = response.file;
+            writeToFile(file, generateMarkdown(response));
+            ;
         }
         );
-}
-
-function generateData(response) {
-    console.log(response.license)
-    const file = response.file;
-    const license = response.license;
-    let badgeLink = ``;
-    switch (license) {
-        case 'MIT':
-            badgeLink = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
-            break;
-        case 'Apache':
-            badgeLink = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
-            break;
-        case 'Boost':
-            badgeLink = '[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)'
-            break;
-        case 'Eclipse':
-            badgeLink = '[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)'
-            break;
-
-        default:
-            break;
-    }
-    const content = `
-# ${response.title}
-${badgeLink}
-
-## Table of Contents
-[Description](#description)
-<br>
-[Technologies Used](#technologies-used)
-<br>
-[Installation](#installation)
-<br>
-[Usage](#usage)
-<br>
-[Contributing](#contributing)
-<br>
-[Tests](#tests)
-<br>
-[License](#license)
-<br>
-[Questions](#questions)
-<br>
-[Credits](#credits)
-
-## Description
-${response.description}
-
-## Technologies Used
-${response.technologies}
-
-## Installation
-${response.installation}
-
-## Usage
-${response.usage}
-
-## Contributing
-${response.contributing}
-
-## Tests
-${response.tests}
-
-## License
-This project is covered under the ${response.license} license.
-
-## Questions
-For any questions about the application, email me at: ${response.email} or find me on github at: ${response.github}
-
-## Credits
-${response.credits}
-    
-    `;
-    writeToFile(file, content)
 }
 
 // Function call to initialize app
