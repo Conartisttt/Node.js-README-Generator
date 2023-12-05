@@ -52,52 +52,52 @@ function renderLicenseSection(license) {
 // a function to generate markdown for README
 function generateMarkdown(response) {
   return `# ${response.title}
-  ${renderLicenseBadge(response.license)}
-  
-  ## Table of Contents
-  [Description](#description)
-  <br>
-  [Technologies Used](#technologies-used)
-  <br>
-  [Installation](#installation)
-  <br>
-  [Usage](#usage)
-  <br>
-  [Contributing](#contributing)
-  <br>
-  [Tests](#tests)
-  <br>
-  [License](#license)
-  <br>
-  [Questions](#questions)
-  <br>
-  [Credits](#credits)
-  
-  ## Description
-  ${response.description}
-  
-  ## Technologies Used
-  ${response.technologies}
-  
-  ## Installation
-  ${response.installation}
-  
-  ## Usage
-  ${response.usage}
-  
-  ## Contributing
-  ${response.contributing}
-  
-  ## Tests
-  ${response.tests}
-  
-  ${renderLicenseSection(response.license)}
-  
-  ## Questions
-  For any questions about the application, email me at: ${response.email} or find me on github at: https://www.github.com/${response.github}
-  
-  ## Credits
-  ${response.credits}
+${renderLicenseBadge(response.license)}
+
+## Table of Contents
+[Description](#description)
+<br>
+[Technologies Used](#technologies-used)
+<br>
+[Installation](#installation)
+<br>
+[Usage](#usage)
+<br>
+[Contributing](#contributing)
+<br>
+[Tests](#tests)
+<br>
+[License](#license)
+<br>
+[Questions](#questions)
+<br>
+[Credits](#credits)
+
+## Description
+${response.description}
+
+## Technologies Used
+${response.technologies}
+
+## Installation
+${response.installation}
+
+## Usage
+${response.usage}
+
+## Contributing
+${response.contributing}
+
+## Tests
+${response.tests}
+
+${renderLicenseSection(response.license)}
+
+## Questions
+For any questions about the application, email me at: ${response.email} or find me on github at: https://www.github.com/${response.github}
+
+## Credits
+${response.credits}
       
       `;
 }
