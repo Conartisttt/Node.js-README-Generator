@@ -42,7 +42,7 @@
   This project is covered under the Boost license. More information can be found here: https://www.boost.org/LICENSE_1_0.txt
   
   ## Questions
-  For any questions about the application, email me at: connerwmar@gmail.com or find me on github at: conartisttt
+  For any questions about the application, email me at: connerwmar@gmail.com or find me on github at: https://www.github.com/conartisttt
   
   ## Credits
   All code written by Conartisttt
