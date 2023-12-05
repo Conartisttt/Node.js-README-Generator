@@ -15,9 +15,7 @@
 
 The purpose of the application is to allow developers to dynamically generate a high-quality README file for their own applications using the command-line so that they can devote more time to working on the project.
 
-The following video demonstrates the applications functionality:
-
-![README Generator](insert link to video here)
+The following video demonstrates the applications functionality: [README Generator](https://drive.google.com/file/d/1GXsK7h2ICFcdjyKxXSITQdxHhsmr4-vu/preview)
 
 ## Technologies Used
 
